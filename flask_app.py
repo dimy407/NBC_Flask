@@ -20,6 +20,7 @@ def upload_file():
         return redirect(url_for('index'))
     else:
         return render_template('load.html')
+    #return redirect(url_for('index'))
 
 
 @app.route('/img_map', methods=['GET', 'POST'])
