@@ -7,7 +7,7 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def index():
     p = script.draw_img(app.config.root_path)
-
+	#ddd
     return render_template('index.html', p=p['param'])
 
 
@@ -20,6 +20,7 @@ def upload_file():
         return redirect(url_for('index'))
     else:
         return render_template('load.html')
+    #return redirect(url_for('index'))
 
 
 @app.route('/img_map', methods=['GET', 'POST'])
