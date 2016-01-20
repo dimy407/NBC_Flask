@@ -7,7 +7,7 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def index():
     p = script.draw_img(app.config.root_path)
-
+	#ddd
     return render_template('index.html', p=p['param'])
 
 
