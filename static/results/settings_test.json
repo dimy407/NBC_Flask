@@ -1,0 +1,23 @@
+﻿{
+	"zodiaks_angle": 15,
+	"zodiac_signs": {
+		"Aries" : {
+			"title": "Aries",
+			"color": [237, 28, 36]
+		}
+	},
+	"hosts_of_heaven":{
+		"Sun":{
+			"title": "Sun",
+			"color": [255, 190, 0],
+			"stet": 1,
+			"angle": 34.9
+		}
+	},
+	"aspects_settings":{
+		"conjunction":{
+			"title": "conjunction",
+			"display": true
+		}
+	}
+}

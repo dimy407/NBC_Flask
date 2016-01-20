@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<HTML>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+</head>
+<body>
+<p><a href="{{ url_for('upload_file') }}">upload</a></p>
+        <div class="maps">
+            <div class="notal-maps">
+                <img src="{{ url_for('static', filename='results/test.png') }}" />
+                <div class="img-maps">
+                    {% for key in p %}
+                        <div
+                            style="
+                                top:{{ p[key]['top'] }}%;
+                                left:{{ p[key]['left'] }}%;
+                                width:{{ p[key]['size'] }}%;
+                                height:{{ p[key]['size'] }}%"
+                            id="{{ key }}"
+                            class="mapObject"
+                            title="{{ p[key]['title'] }}"
+                            data-text="{{ p[key]['description'] }}">
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="descriptions">
+            <!--<img class="mapDescription" src="{{ url_for('static', filename='results/testDesc.png') }}" />
+            <div class="form">
+                <form enctype="multipart/form-data">
+                    <label for="json">json</label><br />
+                    <input id="json" value="actro/result/settings.json"  type="file"><br />
+                    <br />
+                    <input type="button" class="send" value="Сформировать">
+                </form>
+            </div>-->
+
+            <div id="description"></div>
+        </div>
+</body>
+</HTML>
