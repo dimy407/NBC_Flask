@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<HTML>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
+    <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+</head>
+<body>
+    <form action="upload" enctype="multipart/form-data" method="post">
+		<div class="fileform">
+			<div id="fileformlabel"></div>
+			<div class="selectbutton">Brow</div>
+			<input type="file" name="settings_json" id="upload" onchange="getName(this.value);" />
+		</div>
+		<p>
+			<input name="checkbox1" type="checkbox" class="checkbox" id="checkbox1" />
+			<label for="checkbox">displey settings 1</label>
+		</p>
+		<p>
+			<input type="checkbox" class="checkbox" id="checkbox2" />
+			<label for="checkbox">displey settings 2</label>
+		</p>
+		<p>
+			<input type="submit" class="run" value="run">
+		</p>
+	</form>
+</body>
+</HTML>
