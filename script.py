@@ -56,6 +56,7 @@ def update_parameters(p):
         print("Неожиданная ошибка:", sys.exc_info()[0])
         return
         # raise
+		
     """
     r = 1
 
