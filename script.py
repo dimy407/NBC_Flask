@@ -50,17 +50,18 @@ def load_settings(path='', uid=''):
 
 
 def draw_birth_chart(path='', uid='', png={}):
-    font = ImageFont.truetype(png['font_name'], 18)
-    font_small = ImageFont.truetype(png['font_name'], 12)
-    font_astro = ImageFont.truetype(png['font_name'], png['font_size_sign'])
-    font_houses = ImageFont.truetype(png['font_name'], png['font_size_specification'])
+    font = ImageFont.truetype(os.path.join(path, 'static', png['font_name']), 18)
+
+    font_small = ImageFont.truetype(os.path.join(path, 'static', png['font_name']), 12)
+    font_astro = ImageFont.truetype(os.path.join(path, 'static', png['font_name']), png['font_size_sign'])
+    font_houses = ImageFont.truetype(os.path.join(path, 'static', png['font_name']), png['font_size_specification'])
     image = Image.new("RGBA", (png['pict_width'],png['pict_height']), (255,255,255,255))
     draw = ImageDraw.Draw(image)
 
     def draw_birth_chart_settings():
         #print birthchart ->start
         '''print birthchart settings'''
-        draw.text((png['pict_height']+150,png['padding']/3),'Birth chart parameters',font=ImageFont.truetype(png['font_name'], png['font_size_planet']),fill=png['color_house_circle'])
+        draw.text((png['pict_height']+150,png['padding']/3),'Birth chart parameters',font=ImageFont.truetype(os.path.join(path, 'static', png['font_name']), png['font_size_planet']),fill=png['color_house_circle'])
         draw.line ((png['pict_height'] + 120,png['pict_height'] - png['padding'],png['pict_height']+120,png['padding']),fill=png['color_house_circle'])
         draw.text((png['pict_height']+150,png['padding']/3 + 40),'Zodiac positions: ' + str(zodiaks_angle) + ' deg',font=font_houses,fill='Black')
 
@@ -251,7 +252,7 @@ def draw_birth_chart(path='', uid='', png={}):
     def draw_planets():
         #draw a planet
         canvas_planets = {}
-        font_astro = ImageFont.truetype(png['font_name'], png['font_size_planet'])
+        font_astro = ImageFont.truetype(os.path.join(path, 'static', png['font_name']), png['font_size_planet'])
         i = 0
         r_planet_sign_circle = (png['r_degrees_circle'] + png['r_planet_circe'])/2
         #while i < len(hosts_of_heaven):
@@ -293,6 +294,6 @@ def draw_birth_chart(path='', uid='', png={}):
     draw_canvas()
     draw_sign()
     draw_planets()
-    
+
     image.save(os.path.join(path, 'static/results', 'img'+str(uid)+'.png'), "PNG")
     return {'param': canvas_map}
