@@ -296,7 +296,7 @@ def draw_birth_chart(path='', uid=''):
     
     image.save(os.path.join(path, 'static/results', 'img'+str(uid)+'.png'), "PNG")
     return {'param': canvas_map}
-
+"""
 pathH = 'f:/Prj/py/NBC_Flask'
 
 settings = load_settings(pathH)
@@ -307,3 +307,4 @@ aspects = settings['aspects']
 png = settings['png']
 
 h = draw_birth_chart(pathH)
+"""
