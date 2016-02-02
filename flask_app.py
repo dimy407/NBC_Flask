@@ -6,8 +6,15 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    p = script.draw_img(app.config.root_path)
-	#ddd
+    settings = script.load_settings(app.config.root_path)
+    script.zodiaks_angle = settings['zodiaks_angle'] # angle change fo degree
+    script.zodiac_signs = settings['zodiac']
+    script.hosts_of_heaven = settings['hosts_of_heaven']
+    script.aspects = settings['aspects']
+    script.png = settings['png']
+
+    p = script.draw_birth_chart(app.config.root_path)
+    #p = script.draw_img(app.config.root_path)
     return render_template('index.html', p=p['param'])
 
 
@@ -25,8 +32,15 @@ def upload_file():
 
 @app.route('/img_map', methods=['GET', 'POST'])
 def img_map():
+    settings = script.load_settings(app.config.root_path)
+    script.zodiaks_angle = settings['zodiaks_angle'] # angle change fo degree
+    script.zodiac_signs = settings['zodiac']
+    script.hosts_of_heaven = settings['hosts_of_heaven']
+    script.aspects = settings['aspects']
+    script.png = settings['png']
 
-    script.draw_img(app.config.root_path)
+    p = script.draw_birth_chart(app.config.root_path)
+    #script.draw_img(app.config.root_path)
 
     return json.dumps(read_file_json())
 

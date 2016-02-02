@@ -11,10 +11,10 @@ html, body{
 }
 
 .descriptions{
-    float: right;
+    /*float: right;*/
     height: 100%;
-    width: calc(30% - 2px);
-    border-left: 1px solid #212121;
+    /*width: calc(30% - 2px);*/
+    /*border-left: 1px solid #212121;*/
 }
 
 .notal-maps{
@@ -46,7 +46,7 @@ html, body{
 }
 
 #description{
-    display: none;
+    /*display: none;*/
     margin: 0 15px;
     padding: 10px;
     border: 1px solid rgb(33, 33, 33);

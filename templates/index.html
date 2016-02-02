@@ -6,39 +6,59 @@
     <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
 </head>
 <body>
-<p><a href="{{ url_for('upload_file') }}">upload</a></p>
-        <div class="maps">
-            <div class="notal-maps">
-                <img src="{{ url_for('static', filename='results/test.png') }}" />
-                <div class="img-maps">
-                    {% for key in p %}
-                        <div
-                            style="
-                                top:{{ p[key]['top'] }}%;
-                                left:{{ p[key]['left'] }}%;
-                                width:{{ p[key]['size'] }}%;
-                                height:{{ p[key]['size'] }}%"
-                            id="{{ key }}"
-                            class="mapObject"
-                            title="{{ p[key]['title'] }}"
-                            data-text="{{ p[key]['description'] }}">
-                        </div>
-                    {% endfor %}
-                </div>
+    <!--<p><a href="{{ url_for('upload_file') }}">upload</a></p>-->
+    <form action="upload" enctype="multipart/form-data" method="post">
+		<div class="fileform">
+			<div id="fileformlabel"></div>
+			<div class="selectbutton">Brow</div>
+			<input type="file" name="settings_json" id="upload" onchange="getName(this.value);" />
+		</div>
+		<!--<p>
+			<input name="checkbox1" type="checkbox" class="checkbox" id="checkbox1" />
+			<label for="checkbox">displey settings 1</label>
+		</p>
+		<p>
+			<input type="checkbox" class="checkbox" id="checkbox2" />
+			<label for="checkbox">displey settings 2</label>
+		</p>-->
+		<p>
+			<input type="submit" class="run" value="draw">
+		</p>
+	</form>
+     <div class="descriptions">
+        <!--<img class="mapDescription" src="{{ url_for('static', filename='results/testDesc.png') }}" />
+        <div class="form">
+            <form enctype="multipart/form-data">
+                <label for="json">json</label><br />
+                <input id="json" value="actro/result/settings.json"  type="file"><br />
+                <br />
+                <input type="button" class="send" value="Сформировать">
+            </form>
+        </div>-->
+
+        <div id="description"></div>
+    </div>
+
+    <div class="maps">
+        <div class="notal-maps">
+            <img src="{{ url_for('static', filename='results/test.png') }}" />
+            <div class="img-maps" style="width: 900px;">
+                {% for key in p %}
+                    <div
+                        style="
+                            top:{{ p[key]['top'] }}%;
+                            left:{{ p[key]['left'] }}%;
+                            width:{{ p[key]['size'] }}%;
+                            height:{{ p[key]['size'] }}%"
+                        id="{{ key }}"
+                        class="mapObject"
+                        title="{{ p[key]['title'] }}"
+                        data-text="{{ p[key]['description'] }}">
+                    </div>
+                {% endfor %}
             </div>
         </div>
-        <div class="descriptions">
-            <!--<img class="mapDescription" src="{{ url_for('static', filename='results/testDesc.png') }}" />
-            <div class="form">
-                <form enctype="multipart/form-data">
-                    <label for="json">json</label><br />
-                    <input id="json" value="actro/result/settings.json"  type="file"><br />
-                    <br />
-                    <input type="button" class="send" value="Сформировать">
-                </form>
-            </div>-->
+    </div>
 
-            <div id="description"></div>
-        </div>
 </body>
 </HTML>

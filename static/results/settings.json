@@ -1,0 +1,369 @@
+{
+   "zodiaks_angle": 20.00,
+
+   "zodiac": {
+      "aquarius": {
+         "symbol": "\u2652",
+         "color": [
+            255,
+            201,
+            14
+         ],
+         "name": "Aquarius",
+         "order": 2
+      },
+      "cancer": {
+         "symbol": "\u264b",
+         "color": [
+            0,
+            162,
+            232
+         ],
+         "name": "Cancer",
+         "order": 9
+      },
+      "leo": {
+         "symbol": "\u264c",
+         "color": [
+            237,
+            28,
+            36
+         ],
+         "name": "Leo",
+         "order": 8
+      },
+      "capricorn": {
+         "symbol": "\u2651",
+         "color": [
+            237,
+            28,
+            36
+         ],
+         "name": "Capricorn",
+         "order": 3
+      },
+      "sagittarius": {
+         "symbol": "\u2650",
+         "color": [
+            237,
+            28,
+            36
+         ],
+         "name": "Sagittarius",
+         "order": 4
+      },
+      "aries": {
+         "symbol": "\u2648",
+         "color": [
+            237,
+            28,
+            36
+         ],
+         "name": "Aries",
+         "order": 0
+      },
+      "scorpio": {
+         "symbol": "\u264f",
+         "color": [
+            0,
+            162,
+            232
+         ],
+         "name": "Scorpio",
+         "order": 5
+      },
+      "taurus": {
+         "symbol": "\u2649",
+         "color": [
+            185,
+            122,
+            87
+         ],
+         "name": "Taurus",
+         "order": 11
+      },
+      "pisces": {
+         "symbol": "\u2653",
+         "color": [
+            0,
+            162,
+            232
+         ],
+         "name": "Pisces",
+         "order": 1
+      },
+      "virgo": {
+         "symbol": "\u264d",
+         "color": [
+            185,
+            122,
+            87
+         ],
+         "name": "Virgo",
+         "order": 7
+      },
+      "libra": {
+         "symbol": "\u264e",
+         "color": [
+            181,
+            230,
+            29
+         ],
+         "name": "Libra",
+         "order": 6
+      },
+      "gemini": {
+         "symbol": "\u264a",
+         "color": [
+            255,
+            201,
+            14
+         ],
+         "name": "Gemini",
+         "order": 10
+      }
+   },
+
+   "hosts_of_heaven":{
+      "jupiter": {
+         "number_color": [0,0,0],
+         "symbol": "\u2643",
+         "color": [255,190,0],
+         "name": "Jupiter",
+         "angle": 97.2},
+      "chiron": {
+         "number_color": [0,0,0],
+         "symbol": "\u26b7",
+         "color": [0,0,0],
+         "name": "Chiron",
+         "angle": 282.9},
+      "sun": {
+         "number_color": [0,0,0],
+         "symbol": "\u2609",
+         "color": [255,190,0],
+         "name": "Sun",
+         "angle": 34.9},
+      "mercury": {
+         "number_color": [0,0,0],
+         "symbol": "\u263f",
+         "color": [184,204,0],
+         "name": "Mercury",
+         "angle": 21.2},
+      "saturn": {
+         "number_color": [0,0,0],
+         "symbol": "\u2644",
+         "color": [64,32,0],
+         "name": "Saturn",
+         "angle": 306.6},
+      "north_node": {
+         "number_color": [255,0,0],
+         "symbol": "\u260a",
+         "color": [0,0,0],
+         "name": "North Node",
+         "angle": 184.6},
+      "neptune": {
+         "number_color": [0,0,0],
+         "symbol": "\u2646",
+         "color": [0,128,89],
+         "name": "Neptune",
+         "angle": 298.7},
+      "mars": {
+         "number_color": [0,0,0],
+         "symbol": "\u2642",
+         "color": [204,0,0],
+         "name": "Mars",
+         "angle": 67.5},
+      "uranus": {
+         "number_color": [255,0,0],
+         "symbol": "\u2645",
+         "color": [204,0,204],
+         "name": "Uranus",
+         "angle": 243.3},
+      "venus": {
+         "number_color": [0,0,0],
+         "symbol": "\u2640",
+         "color": [0,204,204],
+         "name": "Venus",
+         "angle": 30.0},
+      "pluto": {
+         "number_color": [0,0,0],
+         "symbol": "\u2647",
+         "color": [128,0,0],
+         "name": "Pluto",
+         "angle": 345.8},
+      "lilith": {
+         "number_color": [0,0,0],
+         "symbol": "\u26b8",
+         "color": [128,0,0],
+         "name": "Lilith",
+         "angle": 251.8},
+      "moon": {
+        "number_color": [0,0,0],
+         "symbol": "\u263d",
+         "color": [191,191,191],
+         "name": "Moon",
+         "angle": 44.9}
+   },
+
+   "aspects":{
+      "trine": {
+         "name": "trine",
+         "significant": 10,
+         "display": true,
+         "quantity": 120,
+         "orbis_for_planets": 6,
+         "symbol": "\u25b3",
+         "orbis_for_stets": 6,
+         "color": "Gold"},
+      "nonagon": {
+         "name": "nonagon",
+         "significant": 1,
+         "display": false,
+         "quantity": 40,
+         "orbis_for_planets": 2,
+         "symbol": "40\u00b0",
+         "orbis_for_stets": 2,
+         "color": "Black"},
+      "sentagon": {
+         "name": "sentagon",
+         "significant": 5,
+         "display": false,
+         "quantity": 100,
+         "orbis_for_planets": 2,
+         "symbol": "100\u00b0",
+         "orbis_for_stets": 2,
+         "color": "Black"},
+      "biquintil": {
+         "name": "biquintil",
+         "significant": 1,
+         "display": false,
+         "quantity": 144,
+         "orbis_for_planets": 2,
+         "symbol": "bQ",
+         "orbis_for_stets": 2,
+         "color": "Black"},
+      "opposition": {
+         "name": "opposition",
+         "significant": 10,
+         "display": true,
+         "quantity": 180,
+         "orbis_for_planets": 5,
+         "symbol": "\u260d",
+         "orbis_for_stets": 5,
+         "color": "Pink"},
+      "sextil": {
+         "name": "sextil",
+         "significant": 10,
+         "display": true,
+         "quantity": 60,
+         "orbis_for_planets": 4,
+         "symbol": "\u26b9",
+         "orbis_for_stets": 4,
+         "color": "Blue"},
+      "decile": {
+         "name": "decile",
+         "significant": 1,
+         "display": false,
+         "quantity": 36,
+         "orbis_for_planets": 2,
+         "symbol": "36\u00b0",
+         "orbis_for_stets": 2,
+         "color": "Black"},
+      "tridetsil": {
+         "name": "tridetsil",
+         "significant": 1,
+         "display": false,
+         "quantity": 108,
+         "orbis_for_planets": 2,
+         "symbol": "108\u00b0",
+         "orbis_for_stets": 2,
+         "color": "Black"},
+      "semisextile": {
+         "name": "semisextile",
+         "significant": 10,
+         "display": true,
+         "quantity": 30,
+         "orbis_for_planets": 2,
+         "symbol": "\u26ba",
+         "orbis_for_stets": 2,
+         "color": "Gray"},
+      "quintile": {
+         "name": "quintile",
+         "significant": 5,
+         "display": true,
+         "quantity": 72,
+         "orbis_for_planets": 2,
+         "symbol": "Q",
+         "orbis_for_stets": 2,
+         "color": "Black"},
+      "seminonagon": {
+         "name": "seminonagon",
+         "significant": 1,
+         "display": false,
+         "quantity": 20,
+         "orbis_for_planets": 1,
+         "symbol": "20\u00b0",
+         "orbis_for_stets": 1,
+         "color": "Black"},
+      "bananogon": {
+         "name": "bananogon",
+         "significant": 1,
+         "display": false,
+         "quantity": 80,
+         "orbis_for_planets": 2,
+         "symbol": "80\u00b0",
+         "orbis_for_stets": 2,
+         "color": "Black"},
+      "sesquisquare": {
+         "name": "sesquisquare",
+         "significant": 5,
+         "display": false,
+         "quantity": 135,
+         "orbis_for_planets": 3,
+         "symbol": "135\u00b0",
+         "orbis_for_stets": 3,
+         "color": "Black"},
+      "semisquare": {
+         "name": "semisquare",
+         "significant": 5,
+         "display": false,
+         "quantity": 45,
+         "orbis_for_planets": 2,
+         "symbol": "45\u00b0",
+         "orbis_for_stets": 2,
+         "color": "Black"},
+      "quincunx": {
+         "name": "quincunx",
+         "significant": 10,
+         "display": true,
+         "quantity": 150,
+         "orbis_for_planets": 3,
+         "symbol": "\u26bb",
+         "orbis_for_stets": 3,
+         "color": "Chocolate"},
+      "square": {
+         "name": "square",
+         "significant": 10,
+         "display": true,
+         "quantity": 90,
+         "orbis_for_planets": 5,
+         "symbol": "\u25a1",
+         "orbis_for_stets": 5,
+         "color": "Cyan"},
+      "conjunction": {
+         "name": "conjunction",
+         "significant": 10,
+         "display": true,
+         "quantity": 0,
+         "orbis_for_planets": 5,
+         "symbol": "\u260c",
+         "orbis_for_stets": 12,
+         "color": "red"}
+   },
+
+   "png":{
+      "pict_height": 900,
+      "pict_width": 1500,
+      "padding": 45
+   }
+}
