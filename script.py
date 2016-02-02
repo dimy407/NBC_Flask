@@ -4,6 +4,12 @@ from math import *
 from PIL import Image, ImageDraw, ImageFont
 import json
 
+png = {
+      "pict_height": 900,
+      "pict_width": 1500,
+      "padding": 45
+   }
+
 
 def load_settings(path='', uid=''):
     file = open(os.path.join(path, 'static/results', 'settings_default.json'), 'r').read()
