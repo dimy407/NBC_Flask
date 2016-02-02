@@ -399,7 +399,7 @@
       "color_zodiak_circle": [255,0,0],
       "color_house_circle": [0,0,0,55],
 
-      "font_name": "Fonts/seguisym.ttf",
+      "font_name": "fonts/seguisym.ttf",
       "font_size_specification": 13,
       "font_size_planet": 27,
 
