@@ -296,14 +296,3 @@ def draw_birth_chart(path='', uid=''):
     
     image.save(os.path.join(path, 'static/results', 'img'+str(uid)+'.png'), "PNG")
     return {'param': canvas_map}
-"""
-pathH = 'f:/Prj/py/NBC_Flask'
-
-settings = load_settings(pathH)
-zodiaks_angle = settings['zodiaks_angle'] # angle change fo degree
-zodiac_signs = settings['zodiac']
-hosts_of_heaven = settings['hosts_of_heaven']
-aspects = settings['aspects']
-png = settings['png']
-h = draw_birth_chart(pathH)
-"""
