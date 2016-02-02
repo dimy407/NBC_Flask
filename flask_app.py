@@ -52,9 +52,9 @@ def draw_nbc(path='', timing=''):
     script.zodiac_signs = settings['zodiac']
     script.hosts_of_heaven = settings['hosts_of_heaven']
     script.aspects = settings['aspects']
-    script.png = settings['png']
+    #script.png = settings['png']
 
-    return script.draw_birth_chart(app.config.root_path, timing, script.png)
+    return script.draw_birth_chart(app.config.root_path, timing, settings['png'])
 
 
 def read_file_json():
