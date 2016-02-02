@@ -305,6 +305,5 @@ zodiac_signs = settings['zodiac']
 hosts_of_heaven = settings['hosts_of_heaven']
 aspects = settings['aspects']
 png = settings['png']
-
 h = draw_birth_chart(pathH)
 """
