@@ -5,11 +5,11 @@ from PIL import Image, ImageDraw, ImageFont
 import json
 
 
-def load_settings(path=''):
+def load_settings(path='', uid=''):
     file = open(os.path.join(path, 'static/results', 'settings_default.json'), 'r').read()
     dict_settings_default = json.loads(file)
 
-    file = open(os.path.join(path, 'static/results', 'settings.json'), 'r').read()
+    file = open(os.path.join(path, 'static/results', 'settings'+str(uid)+'.json'), 'r').read()
     dict_settings = json.loads(file)
 
     dict_settings_return = {}
@@ -49,7 +49,7 @@ def load_settings(path=''):
     return dict_settings_return
 
 
-def draw_birth_chart(path=''):
+def draw_birth_chart(path='', uid=''):
     font = ImageFont.truetype(png['font_name'], 18)
     font_small = ImageFont.truetype(png['font_name'], 12)
     font_astro = ImageFont.truetype(png['font_name'], png['font_size_sign'])
@@ -294,7 +294,7 @@ def draw_birth_chart(path=''):
     draw_sign()
     draw_planets()
     
-    image.save(os.path.join(path,'static/results','test.png'), "PNG")
+    image.save(os.path.join(path, 'static/results', 'img'+str(uid)+'.png'), "PNG")
     return {'param': canvas_map}
 
 pathH = 'f:/Prj/py/NBC_Flask'

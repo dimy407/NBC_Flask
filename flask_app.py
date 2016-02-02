@@ -1,33 +1,34 @@
 from flask import Flask, request, render_template, redirect, url_for
 import json, script
+import time
 
 app = Flask(__name__)
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    settings = script.load_settings(app.config.root_path)
-    script.zodiaks_angle = settings['zodiaks_angle'] # angle change fo degree
-    script.zodiac_signs = settings['zodiac']
-    script.hosts_of_heaven = settings['hosts_of_heaven']
-    script.aspects = settings['aspects']
-    script.png = settings['png']
+    p = draw_nbc(app.config.root_path)
+    return render_template('index.html', p=p['param'], uid='')
 
-    p = script.draw_birth_chart(app.config.root_path)
-    #p = script.draw_img(app.config.root_path)
-    return render_template('index.html', p=p['param'])
+
+@app.route('/nbc/<float:timing>', methods=['GET'])
+def show_nbc(timing):
+    p = draw_nbc(app.config.root_path, timing)
+    return render_template('index.html', p=p['param'], uid=str(timing))
 
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
-        #request.form.getlist('checkbox1')
         f = request.files['settings_json']
-        f.save(app.config.root_path + '/static/results/settings.json')
-        return redirect(url_for('index'))
+        if f:
+            timing = str(time.time())
+            f.save(app.config.root_path + '/static/results/settings'+timing+'.json')
+            return redirect(url_for('show_nbc', timing=timing))
+        else:
+            return redirect(url_for('index'))
     else:
         return render_template('load.html')
-    #return redirect(url_for('index'))
 
 
 @app.route('/img_map', methods=['GET', 'POST'])
@@ -43,6 +44,17 @@ def img_map():
     #script.draw_img(app.config.root_path)
 
     return json.dumps(read_file_json())
+
+
+def draw_nbc(path='', timing=''):
+    settings = script.load_settings(path, timing)
+    script.zodiaks_angle = settings['zodiaks_angle'] # angle change fo degree
+    script.zodiac_signs = settings['zodiac']
+    script.hosts_of_heaven = settings['hosts_of_heaven']
+    script.aspects = settings['aspects']
+    script.png = settings['png']
+
+    return script.draw_birth_chart(app.config.root_path, timing)
 
 
 def read_file_json():

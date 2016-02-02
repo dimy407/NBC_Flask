@@ -6,7 +6,7 @@
     <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
 </head>
 <body>
-    <!--<p><a href="{{ url_for('upload_file') }}">upload</a></p>-->
+    <p><a href="{{ url_for('index') }}">Home</a></p>
     <form action="upload" enctype="multipart/form-data" method="post">
 		<div class="fileform">
 			<div id="fileformlabel"></div>
@@ -41,7 +41,7 @@
 
     <div class="maps">
         <div class="notal-maps">
-            <img src="{{ url_for('static', filename='results/test.png') }}" />
+            <img src="{{ url_for('static', filename='results/img'+uid+'.png') }}" />
             <div class="img-maps" style="width: 900px;">
                 {% for key in p %}
                     <div
