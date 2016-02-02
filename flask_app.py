@@ -54,7 +54,7 @@ def draw_nbc(path='', timing=''):
     script.aspects = settings['aspects']
     script.png = settings['png']
 
-    return script.draw_birth_chart(app.config.root_path, timing)
+    return script.draw_birth_chart(app.config.root_path, timing, script.png)
 
 
 def read_file_json():

@@ -4,12 +4,6 @@ from math import *
 from PIL import Image, ImageDraw, ImageFont
 import json
 
-png = {
-      "pict_height": 900,
-      "pict_width": 1500,
-      "padding": 45
-   }
-
 
 def load_settings(path='', uid=''):
     file = open(os.path.join(path, 'static/results', 'settings_default.json'), 'r').read()
@@ -55,7 +49,7 @@ def load_settings(path='', uid=''):
     return dict_settings_return
 
 
-def draw_birth_chart(path='', uid=''):
+def draw_birth_chart(path='', uid='', png={}):
     font = ImageFont.truetype(png['font_name'], 18)
     font_small = ImageFont.truetype(png['font_name'], 12)
     font_astro = ImageFont.truetype(png['font_name'], png['font_size_sign'])
