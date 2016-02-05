@@ -2,18 +2,30 @@
  * Created by User on 15.01.2016.
  */
 
+
 $(document).ready(function(){
-    calcMapWidth();
+    $('#NotalMap').unload(function(){
+        calcMapWidth();
+    });
+
+    /*calcMapWidth();*/
 
     $(window).resize(function(){
         calcMapWidth();
     });
 
-
-
     $(document).on('click','.mapObject',function(){
         var text = $(this).attr('data-text');
-        $('#description').text(text).show();
+        $('#description').text(text).css("border","1px");
+    });
+
+    $("#show_activity_areas").change(function () {
+        if($(this).prop('checked')){
+            $('.mapObject').css("background-color","#AAA");
+        }else{
+            $('.mapObject').css("background-color","inherit");
+        }
+        return false;
     });
 });
 
@@ -22,6 +34,7 @@ function calcMapWidth(){
     var width = elem.height();
     elem.width(width);
 }
+
 
 
 
@@ -35,4 +48,6 @@ function getName (str){
     var filename = str.slice(i);
     var uploaded = document.getElementById("fileformlabel");
     uploaded.innerHTML = filename;
+
+    $('#baton_draw').click();
 }

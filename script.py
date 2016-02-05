@@ -1,9 +1,25 @@
-import os
+﻿import os
 import datetime
 from math import *
 from PIL import Image, ImageDraw, ImageFont
 import json
 
+def key_sort_hosts(key):
+    return int(hosts_of_heaven[key]['order'])
+
+def position_str(deg_fl,positive = '',negative = '',type_return = 'str'):
+        deg = abs(int(deg_fl))
+        min = round(abs(deg_fl - int(deg_fl))*60)
+        sec = 0
+        NSEW = positive if deg_fl>0 else negative
+        if type_return == 'str':
+            return  str(deg) + '\u00b0' + NSEW + str(min) + '\u2032'
+        elif type_return == 'min':
+            return min
+        elif type_return == 'deg':
+            return deg
+        else:
+            return ''
 
 def load_settings(path='', uid=''):
     file = open(os.path.join(path, 'static/results', 'settings_default.json'), 'r').read()
@@ -13,6 +29,8 @@ def load_settings(path='', uid=''):
     dict_settings = json.loads(file)
 
     dict_settings_return = {}
+
+
 
     def update_dict(dict,dict2,branch):
         def format_list_to_tuple(dict):
@@ -38,20 +56,33 @@ def load_settings(path='', uid=''):
         if branch=='hosts_of_heaven':
             for key in dict_settings_return['hosts_of_heaven']:
                 dict_settings_return['hosts_of_heaven'][key]['deg'] = int(dict_settings_return['hosts_of_heaven'][key]['angle'] % 30)
-                dict_settings_return['hosts_of_heaven'][key]['min'] = int(dict_settings_return['hosts_of_heaven'][key]['angle'] % 1 *10)
+                dict_settings_return['hosts_of_heaven'][key]['min'] = position_str(dict_settings_return['hosts_of_heaven'][key]['angle'],type_return='min')
 
     for key in dict_settings_default:
         if dict_settings.get(key):
             update_dict(dict_settings_default[key],dict_settings[key],key)
         else:
             dict_settings_return[key] = dict_settings_default[key] if type(dict_settings_default[key]) == type({}) else dict_settings_default[key]
+    #format date/time
+    date_of_birth_str = dict_settings_return['png']['date_of_birth']
+
+    day = date_of_birth_str[:date_of_birth_str.find('/')]
+    date_of_birth_str = date_of_birth_str[date_of_birth_str.find('/')+1:]
+    month = date_of_birth_str[:date_of_birth_str.find('/')]
+    year = date_of_birth_str[date_of_birth_str.find('/')+1:]
+    date_of_birth_str = dict_settings_return['png']['time_of_birth']
+    hour = date_of_birth_str[:date_of_birth_str.find(':')]
+    min = date_of_birth_str[date_of_birth_str.find(':')+1:]
+    dict_settings_return['png'].update({'date_time_of_birth':datetime.datetime(int(year),int(month),int(day),int(hour),int(min)).strftime("%a, %b %d, %Y  Time: %I:%M%p")})
+
+    longitude_str = position_str(dict_settings_return['png']['longitude'],'W','E')
+    latitude_str = position_str(dict_settings_return['png']['latitude'],'N','S')
+    dict_settings_return['png'].update({'position_of_birth':'Lat: ' + latitude_str + ', Long: '+longitude_str})
 
     return dict_settings_return
 
-
 def draw_birth_chart(path='', uid='', png={}):
     font = ImageFont.truetype(os.path.join(path, 'static', png['font_name']), 18)
-
     font_small = ImageFont.truetype(os.path.join(path, 'static', png['font_name']), 12)
     font_astro = ImageFont.truetype(os.path.join(path, 'static', png['font_name']), png['font_size_sign'])
     font_houses = ImageFont.truetype(os.path.join(path, 'static', png['font_name']), png['font_size_specification'])
@@ -61,42 +92,57 @@ def draw_birth_chart(path='', uid='', png={}):
     def draw_birth_chart_settings():
         #print birthchart ->start
         '''print birthchart settings'''
-        draw.text((png['pict_height']+150,png['padding']/3),'Birth chart parameters',font=ImageFont.truetype(os.path.join(path, 'static', png['font_name']), png['font_size_planet']),fill=png['color_house_circle'])
-        draw.line ((png['pict_height'] + 120,png['pict_height'] - png['padding'],png['pict_height']+120,png['padding']),fill=png['color_house_circle'])
-        draw.text((png['pict_height']+150,png['padding']/3 + 40),'Zodiac positions: ' + str(zodiaks_angle) + ' deg',font=font_houses,fill='Black')
+        str_date = str(datetime.datetime.now())
+        font_title = ImageFont.truetype(os.path.join(path, 'static', 'fonts/Roboto-Bold.ttf'), 24)
+        draw.text((png['padding']/2,png['padding']/4),png['name'],font=font_title,fill=(0,0,0,255))
+
+        font_title = ImageFont.truetype(os.path.join(path, 'static', 'fonts/RobotoCondensed-Light.ttf'), 14)
+        draw.text((png['padding']/3*2,png['padding']),png['date_time_of_birth'],font=font_title,fill=(0,0,0,255))
+        draw.text((png['padding']/3*2,png['padding']*3/2+3),png['city_birth'],font=font_title,fill=(0,0,0,255))
+        draw.text((png['padding']/3*2,png['padding']*2-2),png['position_of_birth'],font=font_title,fill=(0,0,0,255))
+        draw.text((png['padding']/3*2,png['padding']*5/2),'Equal House System',font=font_title,fill=(0,0,0,255))
+
+        draw.line ((png['pict_height'] + png['padding'],png['pict_height'] - png['padding'],png['pict_height']+png['padding'],png['padding']),fill=png['color_house_circle'])
 
         '''print hosts setings'''
         i = 0
-        start_y = png['padding']/3 + 70
-        for key in sorted(hosts_of_heaven):
-            draw.text((png['pict_height']+150,start_y + i*20),hosts_of_heaven[key]['name'],font=font_houses,fill='Black')
-            draw.text((png['pict_height']+230,start_y + i*20),hosts_of_heaven[key]['symbol'],font=font_houses,fill='Black')
-            draw.text((png['pict_height']+250,start_y + i*20),str(hosts_of_heaven[key]['angle']),font=font_houses,fill='Black')
+
+        font_title = ImageFont.truetype(os.path.join(path, 'static', 'fonts/Roboto-Regular.ttf'), 24)
+        y = png['padding']
+        x = png['pict_height']+png['padding']+20
+        draw.text((x-10,y/4),'Birth information',font=font_title,fill=(0,0,0,255))
+        font_title = ImageFont.truetype(os.path.join(path, 'static', 'fonts/Roboto-Regular.ttf'), 14)
+        for key in hosts:
+            draw.text((x,y + i*20-3),hosts_of_heaven[key]['symbol'],font=font_houses,fill=hosts_of_heaven[key]['color'])
+            draw.text((x+20,y + i*20),hosts_of_heaven[key]['name'],font=font_title,fill='Black')
+            host_deg = hosts_of_heaven[key]['deg']
+            delta_f = 0 if len(str(host_deg)) == 2 else 7
+            draw.text((x+100+delta_f,y + i*20),str(hosts_of_heaven[key]['deg']) +'\u00b0',font=font_title,fill='Black')
+            zodiac_str = zodiac_signs[hosts_of_heaven[key]['zodiac']]['abbreviation']
+            zodiac_color = zodiac_signs[hosts_of_heaven[key]['zodiac']]['color']
+            draw.text((x+130,y + i*20),zodiac_str,font=font_title,fill=zodiac_color)
+            draw.text((x+160,y + i*20),str(hosts_of_heaven[key]['min']) +'\u2032',font=font_title,fill='Black')
             i+=1
 
-        '''print aspects settings'''
-        start_y = start_y + i*20 + 20
-        draw.text((png['pict_height']+150,start_y),'Aspects parameters*',font=font_houses,fill='Black')
-        draw.text((png['pict_height']+330,start_y),'quant.',font=font_houses,fill='Black')
-        draw.text((png['pict_height']+375,start_y),'+/-',font=font_houses,fill='Black')
+        y = y + i*20
+        i = 0
+        delta_out = 0
 
-        i=0
-        start_y = start_y + i*20 + 20
-        for key in sorted(aspects):
-            if aspects[key]['display'] == False:
-                draw.text((png['pict_height']+150,start_y + i*20),'off',font=font_houses,fill='Black')
+        for key in sorted([int(x) for x in houses]):
+            draw.text((x+delta_out,y + i*20),houses[str(key)]['symbol'],font=font_title,fill='Black')
+            host_deg = houses[str(key)]['deg']
+            delta_f = 0 if len(str(host_deg)) == 2 else 7
+            draw.text((x+25+delta_f +delta_out,y + i*20),str(houses[str(key)]['deg']) +'\u00b0',font=font_title,fill='Black')
+            zodiac_str = zodiac_signs[houses[str(key)]['zodiac']]['abbreviation']
+            zodiac_color = zodiac_signs[houses[str(key)]['zodiac']]['color']
+            draw.text((x+50 +delta_out,y + i*20),zodiac_str,font=font_title,fill=zodiac_color)
+            draw.text((x+80 +delta_out,y + i*20),str(houses[str(key)]['min']) +'\u2032',font=font_title,fill='Black')
+
+            if int(key)%2 == 0:
+                delta_out = 120
             else:
-                draw.text((png['pict_height']+150,start_y + i*20),'on',font=font_houses,fill='Black')
-            draw.text((png['pict_height']+170,start_y + i*20),aspects[key]['name'],font=font_houses,fill='Black')
-            draw.text((png['pict_height']+260,start_y + i*20),aspects[key]['symbol'],font=font_houses,fill='Black')
-
-            draw.text((png['pict_height']+340,start_y + i*20),str(aspects[key]['quantity'])+str('\u00B0'),font=font_houses,fill='Black')
-            draw.text((png['pict_height']+380,start_y + i*20),str(aspects[key]['orbis_for_planets'])+str('\u00B0'),font=font_houses,fill='Black')
-
-            if aspects[key]['orbis_for_planets'] != aspects[key]['orbis_for_stets']:
-                draw.text((png['pict_height']+400,start_y + i*20),'for stets: ' + str(aspects[key]['orbis_for_stets'])+str('\u00B0'),font=font_houses,fill='Black')
-            i+=1
-        draw.text((png['pict_height']+150,start_y + i*len(aspects) + 60),'* on - aspect displays, off - hidden ',font=font_houses,fill='Black')
+                delta_out = 0
+                i+=1
 
     def draw_canvas():
         # draw 5 circles
@@ -120,9 +166,6 @@ def draw_birth_chart(path='', uid='', png={}):
         x1 = png['center_circle'] - png['r_planet_circe']
         x2 = png['center_circle'] + png['r_planet_circe']
         draw.ellipse([x1,x1,x2,x2], outline=png['color_planet_circle'])
-
-        str_date = str(datetime.datetime.now())
-        draw.text((5,5),str_date,font=font,fill=(0,0,0,255))
 
             #draw a house circle
         """The scale is based on the 4-degree circles:
@@ -252,10 +295,9 @@ def draw_birth_chart(path='', uid='', png={}):
     def draw_planets():
         #draw a planet
         canvas_planets = {}
-        font_astro = ImageFont.truetype(os.path.join(path, 'static', png['font_name']), png['font_size_planet'])
+        font_astro = ImageFont.truetype(png['font_name'], png['font_size_planet'])
         i = 0
         r_planet_sign_circle = (png['r_degrees_circle'] + png['r_planet_circe'])/2
-        #while i < len(hosts_of_heaven):
         for key in hosts_of_heaven:
             radian = radians(-hosts_of_heaven[key]['angle'] + zodiaks_angle + 180)
 
@@ -289,11 +331,136 @@ def draw_birth_chart(path='', uid='', png={}):
             draw.text((x-6,y-6),str(hosts_of_heaven[key]['min']),font=font_small,fill=hosts_of_heaven[key]['number_color'])
         canvas_map.update(canvas_planets)
 
+    def calc_aspects(angle,its_stets):
+        for key in aspects:
+            if aspects[key]['display'] == False:
+                continue
+            if (abs(aspects[key]['quantity']-angle)) < (aspects[key]['orbis_for_planets'] if its_stets==0 else aspects[key]['orbis_for_stets']):
+                return key
+        return None
+
+    def draw_aspects():
+        canvas_aspects = {}
+
+        start_y = png['padding']
+        font_title = ImageFont.truetype(os.path.join(path, 'static', 'fonts/Roboto-Regular.ttf'), 24)
+        draw.text((png['pict_height']+png['padding']+270,start_y/4),'Natal aspects: ',font=font_title,fill='Black')
+        font_title = ImageFont.truetype(os.path.join(path, 'static', 'fonts/Roboto-Regular.ttf'), 16)
+        font_title_small = ImageFont.truetype(os.path.join(path, 'static', 'fonts/Roboto-Regular.ttf'), 12)
+        aspect_number = 0
+        i_count = 0
+        for i in hosts:
+            #print('i = ' + i + ' =>' + str(hosts_of_heaven[i]['angle']))
+            i_count+=1
+            planet_displayed = False
+            for j in hosts[i_count:]:
+                to = hosts_of_heaven[i]['angle'] #Point of departure
+                tp = hosts_of_heaven[j]['angle'] #Point of arrival
+                ad = 0 							 #Angular distance
+                if tp < to:
+                    ad = tp + 360 - to
+                else:
+                    ad = tp - to
+                if ad > 180:
+                    ad = 360 - ad
+
+                aspect_of_2_planets = calc_aspects(ad,int(hosts_of_heaven[i]['stet'])*int(hosts_of_heaven[j]['stet']))
+
+                if aspect_of_2_planets!=None:
+                    #draw a line
+                    draw.line((hosts_of_heaven[i]['x_y'],hosts_of_heaven[j]['x_y']),fill=aspects[aspect_of_2_planets]['color'])
+                    x = int((hosts_of_heaven[i]['x']+hosts_of_heaven[j]['x'])/2)
+                    y = int((hosts_of_heaven[i]['y']+hosts_of_heaven[j]['y'])/2)
+                    draw.text((x,y),aspects[aspect_of_2_planets]['symbol'],font=font_small,fill=aspects[aspect_of_2_planets]['color'])
+                    canvas_aspects[aspects[aspect_of_2_planets]['name'] + ' ' + hosts_of_heaven[j]['name'] + '<->' + hosts_of_heaven[i]['name']] ={
+                                'description': 	aspects[aspect_of_2_planets]['name'] + ' ' + hosts_of_heaven[j]['name'] + '<->' + hosts_of_heaven[i]['name'] + '.Position: X = ' + str(x) + '; Y = ' + str(y) + '. Color - ' + str(aspects[aspect_of_2_planets]['color']),
+                                'title':		aspects[aspect_of_2_planets]['name'] + ' ' + hosts_of_heaven[j]['name'] + '<->' + hosts_of_heaven[i]['name'],
+                                'top':			y/png['pict_height']*100 - 1,
+                                'left':			x/png['pict_height']*100 - 1,
+                                'size':			2.5}
+
+
+                    #x=png['pict_height']+350
+                    x = png['pict_height']+png['padding']+20 + 270
+                    y = start_y +aspect_number*20
+
+                    if planet_displayed == False:
+                        planet_displayed = True
+                        aspect_number+=1
+                        draw.text((x,y),hosts_of_heaven[i]['name'],font=font_title,fill=hosts_of_heaven[i]['color'])
+                        y = start_y +aspect_number*20
+
+
+                    draw.text((x+10,y),hosts_of_heaven[i]['symbol'],font=font_small,fill='Black')
+                    draw.text((x+22,y),aspects[aspect_of_2_planets]['symbol'],font=font_small,fill='Black')
+                    draw.text((x+34,y),hosts_of_heaven[j]['symbol'],font=font_small,fill='Black')
+                    draw.text((x+46,y),hosts_of_heaven[j]['name'],font=font_title_small,fill='Black')
+                    deg_min = str(position_str(ad,type_return = 'deg')) + "\u00b0 " + str(position_str(ad,type_return = 'min'))+ "\u2032 "
+                    draw.text((x+110,y),deg_min,font=font_title_small,fill='Black')
+
+
+                    aspect_number+=1
+        draw.line ((png['pict_height'] + png['padding']+260,png['pict_height'] - png['padding'],png['pict_height']+png['padding']+260,png['padding']),fill=png['color_house_circle'])
+        canvas_map.update(canvas_aspects)
+
+    for i in sorted(houses):
+        house_angle = houses[i]['angle']
+
+        for j in zodiac_signs:
+            sign_angle_start = (zodiac_signs[j]['order']-1)*30 + zodiaks_angle
+            sign_angle_end = (zodiac_signs[j]['order'])*30 + zodiaks_angle
+
+            if house_angle>=sign_angle_start and house_angle<sign_angle_end:
+                houses[i]['zodiac'] = j
+                zodiac_angle = zodiac_signs[j]['order']*30 + zodiaks_angle
+        house_angel_in_zodiac = zodiac_angle - house_angle
+        if house_angel_in_zodiac < 0:
+            house_angel_in_zodiac = 360+house_angel_in_zodiac
+        houses[i]['deg'] = position_str(house_angel_in_zodiac,type_return = 'deg')
+        houses[i]['min'] = position_str(house_angel_in_zodiac,type_return = 'min')
+
+    for i in hosts_of_heaven:
+        host_angle = 360 - hosts_of_heaven[i]['angle']+zodiaks_angle
+        if host_angle > 360:
+            host_angle = host_angle - 360
+
+        for j in zodiac_signs:
+            sign_angle_start = (zodiac_signs[j]['order']-1)*30 + zodiaks_angle
+            sign_angle_end = (zodiac_signs[j]['order'])*30 + zodiaks_angle
+
+            if sign_angle_start < 0:
+                sign_angle_start_1 = 360+(zodiac_signs[j]['order']-1)*30 + zodiaks_angle
+                sign_angle_end_1 = 360
+
+                sign_angle_start_2 = 0
+                sign_angle_end_2 = (zodiac_signs[j]['order'])*30 + zodiaks_angle
+
+                if (host_angle >= sign_angle_start_1 and host_angle < 360):
+                    hosts_of_heaven[i]['zodiac'] = j
+                elif host_angle>=0 and host_angle < sign_angle_end_2:
+                    hosts_of_heaven[i]['zodiac'] = j
+            else:
+                if host_angle >= sign_angle_start and host_angle < sign_angle_end:
+                    hosts_of_heaven[i]['zodiac'] = j
+
     canvas_map = {}
     draw_birth_chart_settings()
     draw_canvas()
     draw_sign()
     draw_planets()
+    draw_aspects()
+
+    for key in hosts_of_heaven:
+        radian = radians(-hosts_of_heaven[key]['angle']+ zodiaks_angle + 180)
+        #draw a planet dot on degree circle
+        x = int(png['center_circle'] + cos(radian)*png['r_degrees_circle'])
+        y = int(png['center_circle'] + sin(radian)*png['r_degrees_circle'])
+        draw.ellipse([x-5,y-5,x+5,y+5], outline=hosts_of_heaven[key]['color'], fill = hosts_of_heaven[key]['color'])
+
+        #draw a planet dot on planet circle
+        x = int(png['center_circle'] + cos(radian)*png['r_planet_circe'])
+        y = int(png['center_circle']+ sin(radian)*png['r_planet_circe'])
+        draw.ellipse([x-5,y-5,x+5,y+5], outline=hosts_of_heaven[key]['color'], fill = hosts_of_heaven[key]['color'])
 
     image.save(os.path.join(path, 'static/results', 'img'+str(uid)+'.png'), "PNG")
     return {'param': canvas_map}

@@ -1,127 +1,130 @@
 {
-   "zodiaks_angle": 20.00,
+   "zodiaks_angle": 20.15,
 
    "zodiac": {
       "aquarius": {
          "symbol": "\u2652",
-         "color": [
-            255,
-            201,
-            14
-         ],
+         "color": [255,201,14],
          "name": "Aquarius",
          "order": 2
       },
       "cancer": {
          "symbol": "\u264b",
-         "color": [
-            0,
-            162,
-            232
-         ],
+         "color": [0,162,232],
          "name": "Cancer",
          "order": 9
       },
       "leo": {
          "symbol": "\u264c",
-         "color": [
-            237,
-            28,
-            36
-         ],
+         "color": [237,28,36],
          "name": "Leo",
          "order": 8
       },
       "capricorn": {
          "symbol": "\u2651",
-         "color": [
-            237,
-            28,
-            36
-         ],
+         "color": [237,28,36],
          "name": "Capricorn",
          "order": 3
       },
       "sagittarius": {
          "symbol": "\u2650",
-         "color": [
-            237,
-            28,
-            36
-         ],
+         "color": [237,28,36],
          "name": "Sagittarius",
          "order": 4
       },
       "aries": {
          "symbol": "\u2648",
-         "color": [
-            237,
-            28,
-            36
-         ],
+         "color": [237,28,36],
          "name": "Aries",
          "order": 0
       },
       "scorpio": {
          "symbol": "\u264f",
-         "color": [
-            0,
-            162,
-            232
-         ],
+         "color": [0,162,232],
          "name": "Scorpio",
          "order": 5
       },
       "taurus": {
          "symbol": "\u2649",
-         "color": [
-            185,
-            122,
-            87
-         ],
+         "color": [185,122,87],
          "name": "Taurus",
          "order": 11
       },
       "pisces": {
          "symbol": "\u2653",
-         "color": [
-            0,
-            162,
-            232
-         ],
+         "color": [0,162,232],
          "name": "Pisces",
          "order": 1
       },
       "virgo": {
          "symbol": "\u264d",
-         "color": [
-            185,
-            122,
-            87
-         ],
+         "color": [185,122,87],
          "name": "Virgo",
          "order": 7
       },
       "libra": {
          "symbol": "\u264e",
-         "color": [
-            181,
-            230,
-            29
-         ],
+         "color": [181,230,29],
          "name": "Libra",
          "order": 6
       },
       "gemini": {
          "symbol": "\u264a",
-         "color": [
-            255,
-            201,
-            14
-         ],
+         "color": [255,201,14],
          "name": "Gemini",
          "order": 10
       }
+   },
+
+   "houses": {
+      "0": {
+         "symbol": "AS",
+         "angle": 0,
+         "zodiac": ""},
+      "1": {
+         "symbol": "II",
+         "angle": 330,
+         "zodiac": ""},
+      "2": {
+         "symbol": "III",
+         "angle": 300,
+         "zodiac": ""},
+      "3": {
+         "symbol": "IC",
+         "angle": 270,
+         "zodiac": ""},
+      "4": {
+         "symbol": "V",
+         "angle": 240,
+         "zodiac": ""},
+      "5": {
+         "symbol": "VI",
+         "angle": 210,
+         "zodiac": ""},
+      "6": {
+         "symbol": "DS",
+         "angle": 180,
+         "zodiac": ""},
+      "7": {
+         "symbol": "VIII",
+         "angle": 150,
+         "zodiac": ""},
+      "8": {
+         "symbol": "IX",
+         "angle": 120,
+         "zodiac": ""},
+      "9": {
+         "symbol": "MC",
+         "angle": 90,
+         "zodiac": ""},
+      "10": {
+         "symbol": "XI",
+         "angle": 60,
+         "zodiac": ""},
+      "11": {
+         "symbol": "XII",
+         "angle": 30,
+         "zodiac": ""}
    },
 
    "hosts_of_heaven":{
@@ -148,7 +151,7 @@
          "symbol": "\u263f",
          "color": [184,204,0],
          "name": "Mercury",
-         "angle": 21.2},
+         "angle": 5.2},
       "saturn": {
          "number_color": [0,0,0],
          "symbol": "\u2644",
@@ -365,24 +368,13 @@
       "pict_height": 900,
       "pict_width": 1500,
       "padding": 45,
-
-      "center_circle": 450,
-
-      "r_house_circle": 405,
-      "r_planet_circe": 162,
-      "r_degrees_circle": 270,
-      "zodiac_percentage_circle": 0.7,
-
-      "delta": 135,
-
-      "color_planet_circle": [0,0,0,128],
-      "color_zodiak_circle": [255,0,0],
-      "color_house_circle": [0,0,0,55],
-
-      "font_name": "fonts/seguisym.ttf",
-      "font_size_specification": 13,
-      "font_size_planet": 27,
-
-      "font_size_sign": 54
-      }
+      "layout":"desktop",
+      "name":"Naren Bansal",
+      "date_of_birth":"5/1/1979",
+      "time_of_birth":"3:45",
+      "city_birth":"New Delhi, India",
+      "latitude":22.8,
+      "longitude":-77.8,
+      "house_system":"E"
+   }
 }

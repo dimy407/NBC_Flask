@@ -3,11 +3,16 @@ html, body{
     padding: 10px 0;
 }
 
+.main{
+    margin: 0px auto;
+    text-align: center;
+}
+
 .maps{
     width: 70%;
     height: 100%;
     float: left;
-    border-right: 1px solid #212121;
+    /*border-right: 1px solid #212121;*/
 }
 
 .descriptions{
@@ -45,12 +50,17 @@ html, body{
     box-shadow: darkgray;
 }
 
+.run{
+    display: none;
+}
+
 #description{
     /*display: none;*/
     margin: 0 15px;
     padding: 10px;
-    border: 1px solid rgb(33, 33, 33);
+    border: 0px solid rgb(33, 33, 33);
     border-radius: 10px;
+    height: 48px;
 }
 
 .fileform {
@@ -62,9 +72,9 @@ html, body{
     overflow: hidden;
     padding: 2px;
     position: relative;
-    text-align: left;
     vertical-align: middle;
     width: 230px;
+    margin: 0px auto;
 }
 
 .fileform .selectbutton {
