@@ -15,7 +15,6 @@ def index():
 def show_nbc(timing):
     p = draw_nbc(app.config.root_path, timing)
     return render_template('index.html', p=p['param'], uid=str(timing), action='upload')
-    #ghg
 
 
 @app.route('/nbc/upload', methods=['GET', 'POST'])
