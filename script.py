@@ -82,7 +82,7 @@ def load_settings(path='', uid=''):
     return dict_settings_return
 
 def draw_birth_chart(path='', uid='', png={}):
-    font = ImageFont.truetype(os.path.join(path, 'static/', png['font_name']), 18)
+    font = ImageFont.truetype(os.path.join(path, 'static', png['font_name']), 18)
     font_small = ImageFont.truetype(os.path.join(path, 'static', png['font_name']), 12)
     font_astro = ImageFont.truetype(os.path.join(path, 'static', png['font_name']), png['font_size_sign'])
     font_houses = ImageFont.truetype(os.path.join(path, 'static', png['font_name']), png['font_size_specification'])
@@ -295,7 +295,7 @@ def draw_birth_chart(path='', uid='', png={}):
     def draw_planets():
         #draw a planet
         canvas_planets = {}
-        font_astro = ImageFont.truetype(png['font_name'], png['font_size_planet'])
+        font_astro = ImageFont.truetype(os.path.join(path, 'static', png['font_name']), png['font_size_planet'])
         i = 0
         r_planet_sign_circle = (png['r_degrees_circle'] + png['r_planet_circe'])/2
         for key in hosts_of_heaven:
