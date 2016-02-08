@@ -64,6 +64,16 @@
                         title="{{ p[key]['title'] }}"
                         data-text="{{ p[key]['description'] }}">
                     </div>
+                    <div
+                        style="
+                            top:{{ p[key]['top'] + 5 }}%;
+                            left:{{ p[key]['left'] + 5 }}%;
+                            display: none;"
+                        id="{{ key + 'Description' }}"
+                        class="mapObjectDescription">
+                        <h1>{{ p[key]['title'] }}</h1>
+                        <p>{{ p[key]['description'] }}</p>
+                    </div>
                 {% endfor %}
             </div>
         </div>

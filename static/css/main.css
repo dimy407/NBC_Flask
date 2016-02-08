@@ -46,6 +46,17 @@ html, body{
     border-radius: 50%;
 }
 
+.mapObjectDescription{
+    position: absolute;
+    background-color: #aaa;
+    /*opacity: 0.356;*/
+    width: 70%;
+    cursor: pointer;
+    /*border-radius: 5%;*/
+    text-align: left;
+    padding-left: 5%;
+}
+
 .mapObject:hover{
     box-shadow: darkgray;
 }

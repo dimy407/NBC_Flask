@@ -15,6 +15,7 @@ $(document).ready(function(){
     });
 
     $(document).on('click','.mapObject',function(){
+        on_off($(this).attr('id'));
         var text = $(this).attr('data-text');
         $('#description').text(text).css("border","1px");
     });
@@ -27,6 +28,7 @@ $(document).ready(function(){
         }
         return false;
     });
+
 });
 
 function calcMapWidth(){
@@ -35,8 +37,13 @@ function calcMapWidth(){
     elem.width(width);
 }
 
-
-
+function on_off(t){
+    p=document.getElementById(t+'Description');
+    if(p.style.display=="none"){
+        p.style.display="block";}
+    else{
+        p.style.display="none";}
+}
 
 function getName (str){
     if (str.lastIndexOf('\\')){
