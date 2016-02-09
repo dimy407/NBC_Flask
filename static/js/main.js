@@ -20,6 +20,10 @@ $(document).ready(function(){
         $('#description').text(text).css("border","1px");
     });
 
+   /* $('#body:not.mapObjectDescription').click(function(){
+        $('.mapObjectDescription').hide();
+    });*/
+
     $("#show_activity_areas").change(function () {
         if($(this).prop('checked')){
             $('.mapObject').css("background-color","#AAA");
@@ -38,8 +42,9 @@ function calcMapWidth(){
 }
 
 function on_off(t){
-    p=document.getElementById(t+'Description');
+    p = document.getElementById(t+'Description');
     if(p.style.display=="none"){
+        $('.mapObjectDescription').hide();
         p.style.display="block";}
     else{
         p.style.display="none";}
