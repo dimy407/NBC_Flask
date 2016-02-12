@@ -8,8 +8,6 @@ $(document).ready(function(){
         calcMapWidth();
     });
 
-    /*calcMapWidth();*/
-
     $(window).resize(function(){
         calcMapWidth();
     });
@@ -20,9 +18,9 @@ $(document).ready(function(){
         $('#description').text(text).css("border","1px");
     });
 
-   /* $('#body:not.mapObjectDescription').click(function(){
+    $('body:not(.mapObjectDescription)').click(function(){
         $('.mapObjectDescription').hide();
-    });*/
+    });!
 
     $("#show_activity_areas").change(function () {
         if($(this).prop('checked')){
